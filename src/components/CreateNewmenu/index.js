@@ -53,18 +53,20 @@ class CreateNewmenu extends React.Component {
   };
 
   async componentWillMount() {
-    const snapshot = await FirebaseManager.getValue("/cuisime");
+    const {match} = this.props;
+    const snapshot = await FirebaseManager.getValue(`/stores/${match.params.StoreKey}/cuisine`);
     if (snapshot) {
       this.setState({
         list: _.values(snapshot)
       });
     }
 
-    FirebaseManager.bindAsyncFunc("/cuisime", this.updateCuisime);
+    FirebaseManager.bindAsyncFunc(`/stores/${match.params.StoreKey}/cuisine`, this.updateCuisime);
   }
 
   componentWillUnmount() {
-    FirebaseManager.unbindAsyncFunc("/cuisime");
+    const {match} = this.props;
+    FirebaseManager.unbindAsyncFunc(`/stores/${match.params.StoreKey}/cuisine`);
   }
 
   updateCuisime = cuisines => {
@@ -73,8 +75,9 @@ class CreateNewmenu extends React.Component {
   };
 
   saveCuisine = async() => {
+    const {match} = this.props;
     const {cuisine} = this.state;
-    await FirebaseManager.addNewData("/cuisime", cuisine);
+    await FirebaseManager.addNewData(`/stores/${match.params.StoreKey}/cuisine`, cuisine);
     this.setState({showAddModal: false});
   };
 

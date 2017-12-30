@@ -166,7 +166,7 @@ export default class App extends Component {
             user = {
               this.state.user
             } />}/>
-            <Route path="/create/menu" component={CreateNewmenu}/>
+            <Route path="/create/menu/:StoreKey" component={CreateNewmenu}/>
             <Route path="/store" component={Store}/>
 
             <Drawer width={200} open={this.state.sidebar} zDepth={1} docked={false}>

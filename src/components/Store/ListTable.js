@@ -19,7 +19,7 @@ const ListTable = props => {
           </TableRowColumn>
           <TableRowColumn>{store.name}</TableRowColumn>
           <TableRowColumn>
-            <Link to="/create/menu">
+            <Link to={`/create/menu/${store.StoreKey}`}>
               <IconButton
                 tooltipPosition="bottom-right"
                 tooltip="編輯菜單"
