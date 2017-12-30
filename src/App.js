@@ -49,7 +49,16 @@ export default class App extends Component {
       passwordErrorText: ""
     };
   }
-
+  async componentDidMount() {
+    try {
+      await FirebaseManager.getRedirectResult();
+      if (FirebaseManager.user) {
+        this.setState({user: FirebaseManager.user, LOGON: "LOGON"});
+      } else if (window.location.pathname !== "/") {
+        window.location = "/";
+      }
+    } catch (error) {}
+  }
   login = async() => {
     try {
       await this.logout();
@@ -152,7 +161,11 @@ export default class App extends Component {
             </Modal>
             <AppBar
               title="訂便當"
-              onLeftIconButtonClick={() => this.setState({sidebar: true})}
+              onLeftIconButtonClick={() => {
+              if (FirebaseManager.user) {
+                this.setState({sidebar: true});
+              }
+            }}
               iconElementLeft={< IconButton iconClassName = "fa fa-bars" />}
               iconElementRight={< RightIconButton logout = {
               this.logout

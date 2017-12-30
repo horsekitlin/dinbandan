@@ -14,6 +14,27 @@ class FirebaseManagerClass {
     this.auth = firebase.auth();
   }
 
+  get user() {
+    if (this.auth.currentUser) {
+      return this.auth.currentUser;
+    } else {
+      return null;
+    }
+  }
+
+  get name() {
+    return this.auth.currentUser.displayName;
+  }
+  get email() {
+    return this.auth.currentUser.email;
+  }
+
+  getRedirectResult() {
+    return this
+      .auth
+      .getRedirectResult();
+  }
+
   uploadFile(file) {
     const route = `/${file.name}`;
     return this
