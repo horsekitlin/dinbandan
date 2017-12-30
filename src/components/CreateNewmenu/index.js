@@ -30,7 +30,6 @@ const Row = styled.div `
 class CreateNewmenu extends React.Component {
   state = {
     list: [],
-    name: "炒飯",
     price: 0,
     max: -1,
     min: -1,
@@ -41,10 +40,10 @@ class CreateNewmenu extends React.Component {
       ice: "加冰"
     },
     cuisine: {
-      logo: "https://i.ytimg.com/vi/ZPgswecFK6s/maxresdefault.jpg",
+      logo: "",
       count: 1,
-      name: "炒飯",
-      price: 60,
+      name: "",
+      price: 0,
       options: {}
     },
     showAddModal: false
