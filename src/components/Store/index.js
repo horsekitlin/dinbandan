@@ -65,7 +65,7 @@ class StoreList extends React.Component {
 
   saveStore = async() => {
     const {storeData} = this.state;
-    await FirebaseManager.addNewStore("/stores", storeData);
+    await FirebaseManager.addNewData("/stores", storeData);
   };
 
   deleteStore = async StoreKey => {
@@ -79,7 +79,6 @@ class StoreList extends React.Component {
 
   render() {
     const storeList = _.values(this.state.list);
-    console.log(this.props);
     return (
       <div>
         <Table fixedHeader={true} fixedFooter={true}>
