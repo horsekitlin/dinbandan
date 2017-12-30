@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { cyan500, blue800, white, red900 } from "material-ui/styles/colors";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, {Component} from "react";
+import {cyan500, blue800, white, red900} from "material-ui/styles/colors";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
@@ -19,7 +19,7 @@ import styled from "styled-components";
 import _ from "lodash";
 import Store from "./components/Store";
 
-const LoginContent = styled.div`
+const LoginContent = styled.div `
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,42 +50,36 @@ export default class App extends Component {
     };
   }
 
-  login = async () => {
+  login = async() => {
     try {
       await this.logout();
       const result = await FirebaseManager.signInWithPopup();
-      this.setState({ user: result.user, LOGON: "LOGON", LoginModal: false });
+      this.setState({user: result.user, LOGON: "LOGON", LoginModal: false});
     } catch (error) {
-      this.setState({ LoginModal: false });
+      this.setState({LoginModal: false});
     }
   };
 
-  loginWithEmail = async () => {
-    const { account, password } = this.state;
+  loginWithEmail = async() => {
+    const {account, password} = this.state;
     if (_.isEmpty(account)) {
-      this.setState({ accountErrorText: "帳號不可為空" });
+      this.setState({accountErrorText: "帳號不可為空"});
     } else if (_.isEmpty(password)) {
-      this.setState({ passwordErrorText: "帳號不可為空" });
+      this.setState({passwordErrorText: "帳號不可為空"});
     } else {
       try {
-        const user = await FirebaseManager.signInWithEmailAndPassword(
-          account,
-          password
-        );
-        this.setState({ user, LOGON: "LOGON", LoginModal: false });
+        const user = await FirebaseManager.signInWithEmailAndPassword(account, password);
+        this.setState({user, LOGON: "LOGON", LoginModal: false});
       } catch (error) {
-        const user = await FirebaseManager.createUserWithEmailAndPassword(
-          account,
-          password
-        );
-        this.setState({ user, LOGON: "LOGON", LoginModal: false });
+        const user = await FirebaseManager.createUserWithEmailAndPassword(account, password);
+        this.setState({user, LOGON: "LOGON", LoginModal: false});
       }
     }
   };
 
-  logout = async () => {
+  logout = async() => {
     await FirebaseManager.signOut();
-    this.setState({ user: {}, LOGON: "NONE" });
+    this.setState({user: {}, LOGON: "NONE"});
   };
 
   render() {
@@ -97,24 +91,23 @@ export default class App extends Component {
               ariaHideApp={false}
               isOpen={this.state.LoginModal}
               style={{
-                overlay: {
-                  height: "100vh",
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: "rgba(0, 0, 0, 0.75)"
-                },
-                content: {
-                  marginLeft: "30vw",
-                  marginTop: "30vh",
-                  width: "30vw",
-                  height: "30vh"
-                }
-              }}
-              contentLabel="Modal"
-            >
+              overlay: {
+                height: "100vh",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.75)"
+              },
+              content: {
+                marginLeft: "30vw",
+                marginTop: "30vh",
+                width: "30vw",
+                height: "30vh"
+              }
+            }}
+              contentLabel="Modal">
               <LoginContent>
                 <div>
                   <TextField
@@ -122,82 +115,74 @@ export default class App extends Component {
                     type="email"
                     errorText={this.state.accountErrorText}
                     value={this.state.account}
-                    onChange={e => this.setState({ account: e.target.value })}
-                  />
+                    onChange={e => this.setState({account: e.target.value})}/>
                   <TextField
                     hintText="Password"
                     floatingLabelText="Password"
                     errorText={this.state.passwordErrorText}
                     type="password"
                     value={this.state.password}
-                    onChange={e => this.setState({ password: e.target.value })}
-                  />
+                    onChange={e => this.setState({password: e.target.value})}/>
                   <RaisedButton
                     label="登入"
                     onClick={this.loginWithEmail}
                     backgroundColor={blue800}
-                    labelColor={white}
-                  />
+                    labelColor={white}/>
                 </div>
                 <div>
                   <RaisedButton
                     label="FacebookLogin"
                     onClick={this.login}
-                    style={{ margin: 10 }}
+                    style={{
+                    margin: 10
+                  }}
                     primary={true}
-                    icon={<FontIcon className="fa fa-facebook" color={white} />}
-                  />
+                    icon={< FontIcon className = "fa fa-facebook" color = {
+                    white
+                  } />}/>
                 </div>
                 <div>
                   <RaisedButton
                     label="取消"
-                    onClick={() => this.setState({ LoginModal: false })}
+                    onClick={() => this.setState({LoginModal: false})}
                     backgroundColor={red900}
-                    labelColor={white}
-                  />
+                    labelColor={white}/>
                 </div>
               </LoginContent>
             </Modal>
             <AppBar
               title="訂便當"
-              onLeftIconButtonClick={() => this.setState({ sidebar: true })}
-              iconElementLeft={<IconButton iconClassName="fa fa-bars" />}
-              iconElementRight={
-                <RightIconButton
-                  logout={this.logout}
-                  setLoginModal={() => this.setState({ LoginModal: true })}
-                  LOGON={this.state.LOGON}
-                  user={this.state.user}
-                />
-              }
-            />
-            <Route path="/create/menu" component={CreateNewmenu} />
-            <Route path="/store" component={Store} />
+              onLeftIconButtonClick={() => this.setState({sidebar: true})}
+              iconElementLeft={< IconButton iconClassName = "fa fa-bars" />}
+              iconElementRight={< RightIconButton logout = {
+              this.logout
+            }
+            setLoginModal = {
+              () => this.setState({LoginModal: true})
+            }
+            LOGON = {
+              this.state.LOGON
+            }
+            user = {
+              this.state.user
+            } />}/>
+            <Route path="/create/menu" component={CreateNewmenu}/>
+            <Route path="/store" component={Store}/>
 
-            <Drawer
-              width={200}
-              open={this.state.sidebar}
-              zDepth={1}
-              docked={false}
-            >
+            <Drawer width={200} open={this.state.sidebar} zDepth={1} docked={false}>
               <AppBar
                 onLeftIconButtonClick={() => console.log("left icon")}
-                iconElementLeft={<div />}
-                iconElementRight={
-                  <IconButton
-                    onClick={() => this.setState({ sidebar: false })}
-                    iconClassName="fa fa-arrow-left"
-                    iconStyle={{ color: "white" }}
-                  />
-                }
-              />
+                iconElementLeft={< div />}
+                iconElementRight={< IconButton onClick = {
+                () => this.setState({sidebar: false})
+              }
+              iconClassName = "fa fa-arrow-left" iconStyle = {{ color: "white" }}/>}/>
               <Link to="/store">
                 <MenuItem
                   primaryText="商店列表"
-                  leftIcon={<FontIcon className="fa fa-building" />}
-                />
+                  leftIcon={< FontIcon className = "fa fa-building" />}/>
               </Link>
-              <Divider />
+              <Divider/>
             </Drawer>
           </div>
         </MuiThemeProvider>

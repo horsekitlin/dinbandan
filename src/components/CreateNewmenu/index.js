@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-import FirebaseManager from "../utils/FirebaseManager";
+import FirebaseManager from "../../utils/FirebaseManager";
 
 class CreateNewmenu extends React.Component {
   state = {
@@ -11,9 +11,11 @@ class CreateNewmenu extends React.Component {
     count: 0
   };
   submit = () => {
-    FirebaseManager.createNewCuisine({ ...this.state }).catch(error =>
-      console.log(error)
-    );
+    FirebaseManager
+      .createNewCuisine({
+      ...this.state
+    })
+      .catch(error => console.log(error));
   };
   render() {
     return (
@@ -24,8 +26,7 @@ class CreateNewmenu extends React.Component {
           <TextField
             name="name"
             defaultValue={this.state.name}
-            onBlur={e => this.setState({ name: e.target.value })}
-          />
+            onBlur={e => this.setState({name: e.target.value})}/>
         </div>
         <div>
           <lable>價格</lable>
@@ -33,8 +34,7 @@ class CreateNewmenu extends React.Component {
             type="tel"
             name="price"
             defaultValue={this.state.price}
-            onBlur={e => this.setState({ price: e.target.value })}
-          />
+            onBlur={e => this.setState({price: e.target.value})}/>
         </div>
         <div>
           <lable>每份數量</lable>
@@ -42,16 +42,14 @@ class CreateNewmenu extends React.Component {
             type="tel"
             name="count"
             defaultValue={this.state.count}
-            onBlur={e => this.setState({ count: e.target.value })}
-          />
+            onBlur={e => this.setState({count: e.target.value})}/>
         </div>
         <div>
           <RaisedButton
             label="新增"
             labelPosition="before"
             containerElement="label"
-            onClick={this.submit}
-          />
+            onClick={this.submit}/>
         </div>
       </div>
     );

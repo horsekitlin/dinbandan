@@ -1,31 +1,42 @@
 import React from "react";
 import propTypes from "prop-types";
-import { TableBody, TableRow, TableRowColumn } from "material-ui/Table";
-import { red900 } from "material-ui/styles/colors";
+import {TableRow, TableRowColumn} from "material-ui/Table";
+import {red900} from "material-ui/styles/colors";
+import {Link} from "react-router-dom";
+import IconButton from "material-ui/IconButton";
 import FlatButton from "material-ui/FlatButton";
+import FontIcon from "material-ui/FontIcon";
 import Avatar from "material-ui/Avatar";
+
 const ListTable = props => {
-  return props.storeList.map((store, index) => {
-    return (
-      <TableRow key={store.StoreKey}>
-        <TableRowColumn>
-          <Avatar src={store.logo.url} />
-        </TableRowColumn>
-        <TableRowColumn>{store.name}</TableRowColumn>
-        <TableRowColumn>
-          <FlatButton label="揪團" onClick={() => alert("開啟揪團")} />
-        </TableRowColumn>
-        <TableRowColumn>
-          <FlatButton
-            backgroundColor={red900}
-            labelStyle={{ color: "white" }}
-            label="刪除"
-            onClick={() => props.deleteStore(store.StoreKey)}
-          />
-        </TableRowColumn>
-      </TableRow>
-    );
-  });
+  return props
+    .storeList
+    .map((store, index) => {
+      return (
+        <TableRow key={store.StoreKey}>
+          <TableRowColumn>
+            <Avatar src={store.logo.url}/>
+          </TableRowColumn>
+          <TableRowColumn>{store.name}</TableRowColumn>
+          <TableRowColumn>
+            <Link to="/create/menu">
+              <IconButton
+                tooltipPosition="bottom-right"
+                tooltip="編輯菜單"
+                iconClassName="fa fa-gear"/>
+            </Link>
+            <IconButton
+              tooltipPosition="bottom-left"
+              tooltip="刪除店家"
+              iconClassName="fa fa-times-circle"
+              iconStyle={{
+              color: red900
+            }}
+              onClick={() => props.deleteStore(store.StoreKey)}/>
+          </TableRowColumn>
+        </TableRow>
+      );
+    });
 };
 
 ListTable.propTypes = {
