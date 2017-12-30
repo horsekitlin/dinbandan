@@ -45,9 +45,7 @@ class CreateNewmenu extends React.Component {
       count: 1,
       name: "炒飯",
       price: 60,
-      options: {
-        spicy: "加辣"
-      }
+      options: {}
     },
     showAddModal: false
   };
