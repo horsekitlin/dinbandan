@@ -36,19 +36,17 @@ const muiTheme = getMuiTheme({
 });
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidebar: false,
-      LOGON: "NONE",
-      user: {},
-      LoginModal: false,
-      account: "",
-      password: "",
-      accountErrorText: "",
-      passwordErrorText: ""
-    };
-  }
+  state = {
+    sidebar: false,
+    LOGON: "NONE",
+    user: {},
+    LoginModal: false,
+    account: "",
+    password: "",
+    accountErrorText: "",
+    passwordErrorText: ""
+  };
+
   async componentDidMount() {
     try {
       await FirebaseManager.getRedirectResult();
