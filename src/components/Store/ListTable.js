@@ -4,8 +4,6 @@ import {TableRow, TableRowColumn} from "material-ui/Table";
 import {red900} from "material-ui/styles/colors";
 import {Link} from "react-router-dom";
 import IconButton from "material-ui/IconButton";
-import FlatButton from "material-ui/FlatButton";
-import FontIcon from "material-ui/FontIcon";
 import Avatar from "material-ui/Avatar";
 
 const ListTable = props => {

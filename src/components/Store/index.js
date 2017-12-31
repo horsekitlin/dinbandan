@@ -8,7 +8,6 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
-
 import Dialog from "material-ui/Dialog";
 import IconButton from "material-ui/IconButton";
 import FlatButton from "material-ui/FlatButton";

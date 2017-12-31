@@ -9,9 +9,8 @@ import {
   TableRow,
   TableRowColumn
 } from "material-ui/Table";
-import Dialog from "material-ui/Dialog";
-import RaisedButton from "material-ui/RaisedButton";
 import Avatar from "material-ui/Avatar";
+import Dialog from "material-ui/Dialog";
 import FirebaseManager from "../../utils/FirebaseManager";
 import IconButton from "material-ui/IconButton";
 import TextField from "material-ui/TextField";
@@ -19,7 +18,6 @@ import FlatButton from "material-ui/FlatButton";
 import MenuItem from "material-ui/MenuItem";
 import DropDownMenu from "material-ui/DropDownMenu";
 import styled from "styled-components";
-import {Divider} from "material-ui";
 
 const Row = styled.div `
   display: flex;
