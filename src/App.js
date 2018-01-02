@@ -17,7 +17,7 @@ import Modal from "react-modal";
 import FontIcon from "material-ui/FontIcon";
 import styled from "styled-components";
 import _ from "lodash";
-import Store from "./components/Store";
+import Store from "./containers/Store";
 import {Grid, Row, Col} from "react-flexbox-grid";
 
 const LoginContent = styled.div `
