@@ -1,44 +1,63 @@
 import React from "react";
 import propTypes from "prop-types";
-import {TableRow, TableRowColumn} from "material-ui/Table";
-import {red900} from "material-ui/styles/colors";
-import {Link} from "react-router-dom";
 import IconButton from "material-ui/IconButton";
+import RaisedButton from "material-ui/RaisedButton";
+import FontIcon from "material-ui/FontIcon";
 import Avatar from "material-ui/Avatar";
+import Paper from "material-ui/Paper";
+import Divider from "material-ui/Divider";
+import { red900 } from "material-ui/styles/colors";
+import { Link } from "react-router-dom";
+import { List, ListItem } from "material-ui/List";
+import { Grid, Row, Col } from "react-flexbox-grid";
 
-const ListTable = props => {
-  return props
-    .storeList
-    .map((store, index) => {
+class ListTable extends React.PureComponent {
+  static propTypes = {
+    deleteStore: propTypes.func.isRequired,
+    history: propTypes.object.isRequired
+  };
+
+  render() {
+    return this.props.storeList.map((store, index) => {
       return (
-        <TableRow key={store.StoreKey}>
-          <TableRowColumn>
-            <Avatar src={store.logo.url}/>
-          </TableRowColumn>
-          <TableRowColumn>{store.name}</TableRowColumn>
-          <TableRowColumn>
-            <Link to={`/create/menu/${store.StoreKey}`}>
-              <IconButton
-                tooltipPosition="bottom-left"
-                tooltip="編輯菜單"
-                iconClassName="fa fa-gear"/>
-            </Link>
-            <IconButton
-              tooltipPosition="bottom-left"
-              tooltip="刪除店家"
-              iconClassName="fa fa-times-circle"
-              iconStyle={{
-              color: red900
-            }}
-              onClick={() => props.deleteStore(store.StoreKey)}/>
-          </TableRowColumn>
-        </TableRow>
+        <Col key={store.StoreKey} xs={12} md={3}>
+          <Paper
+          style={{
+            width: "90%",
+            textAlign: "center",
+            display: "inline-block"
+          }}
+          >
+          <List>
+          <Avatar src={store.logo.url} size={120} style={{margin: 10}} />
+              <Divider />
+                  <RaisedButton
+                    label="編輯菜單"
+                    onClick={() =>
+                      this.props.history.push(`/create/menu/${store.StoreKey}`)
+                    }
+                    style={{ margin: 5 }}
+                    icon={<FontIcon className="fa fa-gear" />}
+                  />
+                  <RaisedButton
+                    style={{ margin: 5 }}
+                    label="刪除"
+                    onClick={() => this.props.deleteStore(store.StoreKey)}
+                    icon={
+                      <FontIcon color={red900} className="fa fa-times-circle" />
+                    }
+                  />
+          </List>
+          </Paper>
+        </Col>
       );
     });
-};
+  }
+}
 
 ListTable.propTypes = {
-  deleteStore: propTypes.func.isRequired
+  deleteStore: propTypes.func.isRequired,
+  history: propTypes.object.isRequired
 };
 
 export default ListTable;

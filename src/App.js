@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {cyan500, blue800, white, red900} from "material-ui/styles/colors";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 import Divider from "material-ui/Divider";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
@@ -18,6 +17,7 @@ import FontIcon from "material-ui/FontIcon";
 import styled from "styled-components";
 import _ from "lodash";
 import Store from "./containers/Store";
+import Sidebar from "./components/utils/Sidebar";
 import {Grid, Row, Col} from "react-flexbox-grid";
 
 const LoginContent = styled.div `
@@ -58,6 +58,7 @@ export default class App extends Component {
       }
     } catch (error) {}
   }
+
   login = async() => {
     try {
       await this.logout();
@@ -185,7 +186,7 @@ export default class App extends Component {
                 this.setState({sidebar: true});
               }
             }}
-              iconElementLeft={< IconButton iconClassName = "fa fa-bars" />}
+              iconElementLeft={< IconButton tooltipPosition="bottom-left" iconClassName = "fa fa-bars" />}
               iconElementRight={< RightIconButton logout = {
               this.logout
             }
@@ -201,21 +202,9 @@ export default class App extends Component {
             <Route path="/create/menu/:StoreKey" component={CreateNewmenu}/>
             <Route path="/store" component={Store}/>
 
-            <Drawer width={200} open={this.state.sidebar} zDepth={1} docked={false}>
-              <AppBar
-                onLeftIconButtonClick={() => console.log("left icon")}
-                iconElementLeft={< div />}
-                iconElementRight={< IconButton onClick = {
-                () => this.setState({sidebar: false})
-              }
-              iconClassName = "fa fa-arrow-left" iconStyle = {{ color: "white" }}/>}/>
-              <Link to="/store">
-                <MenuItem
-                  primaryText="商店列表"
-                  leftIcon={< FontIcon className = "fa fa-building" />}/>
-              </Link>
-              <Divider/>
-            </Drawer>
+            <Sidebar
+              openSidebar={() => this.setState({sidebar: false})}
+              isOpen={this.state.sidebar}/>
           </Grid>
         </MuiThemeProvider>
       </Router>
