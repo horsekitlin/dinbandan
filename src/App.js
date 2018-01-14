@@ -2,8 +2,6 @@ import React, {Component} from "react";
 import {cyan500, blue800, white, red900} from "material-ui/styles/colors";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import MenuItem from "material-ui/MenuItem";
-import Divider from "material-ui/Divider";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import AppBar from "material-ui/AppBar";
 import RaisedButton from "material-ui/RaisedButton";

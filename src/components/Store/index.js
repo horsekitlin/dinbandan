@@ -2,7 +2,6 @@ import React from "react";
 import propTypes from "prop-types";
 import Dialog from "material-ui/Dialog";
 import FontIcon from "material-ui/FontIcon";
-import IconButton from "material-ui/IconButton";
 import FlatButton from "material-ui/FlatButton";
 import Avatar from "material-ui/Avatar";
 import DropDownMenu from "material-ui/DropDownMenu";
@@ -11,7 +10,6 @@ import TextField from "material-ui/TextField";
 import FirebaseManager from "../../utils/FirebaseManager";
 import ListTable from "./ListTable";
 import _ from "lodash";
-import styled from "styled-components";
 import { Grid, Row } from "react-flexbox-grid";
 
 class StoreList extends React.Component {
@@ -72,12 +70,12 @@ class StoreList extends React.Component {
       <div>
         <Grid>
           <Row>
-          <FlatButton
-            style={{marginBottom: 10}}
+            <FlatButton
+              style={{ marginBottom: 10 }}
               label="新增商店"
               labelPosition="before"
-              icon={<FontIcon className="fa fa-plus"/>}
-              onClick={() => this.setState({showAddModal: true})}
+              icon={<FontIcon className="fa fa-plus" />}
+              onClick={() => this.setState({ showAddModal: true })}
             />
           </Row>
           <Row>
