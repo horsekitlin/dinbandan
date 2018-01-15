@@ -1,6 +1,8 @@
 import firebase from "firebase";
+import _ from "lodash";
 import uuid from "uuid/v4";
 import configs from "../config";
+import {initialAdmin} from "../configs/initialConfig";
 
 class FirebaseManagerClass {
   constructor(options) {
@@ -12,6 +14,7 @@ class FirebaseManagerClass {
     this.database = firebase.database();
     this.storage = firebase.storage();
     this.auth = firebase.auth();
+    this.initialAdmin();
   }
 
   get user() {
@@ -27,6 +30,14 @@ class FirebaseManagerClass {
   }
   get email() {
     return this.auth.currentUser.email;
+  }
+  
+  async initialAdmin(){
+    let admin = await this.getValue("/users/admin");
+    if(_.isNull(admin)){
+      await this.addNewDataByKey("/users", "admin", initialAdmin);
+      admin = await this.getValue("/users/admin");
+    }
   }
 
   getRedirectResult() {
@@ -91,6 +102,15 @@ class FirebaseManagerClass {
       .ref(route)
       .child(key)
       .remove();
+  }
+  async addNewDataByKey(route, key, query){
+    const updates = {
+      [`/${route}/${key}`]: query
+    };
+    return this
+    .database
+    .ref()
+    .update(updates);
   }
 
   async addNewData(route, query) {
