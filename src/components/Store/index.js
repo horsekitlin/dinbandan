@@ -1,3 +1,4 @@
+import { Grid, Row } from "react-flexbox-grid";
 import React from "react";
 import propTypes from "prop-types";
 import Dialog from "material-ui/Dialog";
@@ -10,7 +11,7 @@ import TextField from "material-ui/TextField";
 import FirebaseManager from "../../utils/FirebaseManager";
 import ListTable from "./ListTable";
 import _ from "lodash";
-import { Grid, Row } from "react-flexbox-grid";
+
 
 class StoreList extends React.Component {
   static propTypes = {};
@@ -18,7 +19,6 @@ class StoreList extends React.Component {
     super(props);
     this.state = {
       list: [],
-      showAddModal: false,
       storeData: {
         logo: {
           url:
@@ -75,7 +75,7 @@ class StoreList extends React.Component {
               label="新增商店"
               labelPosition="before"
               icon={<FontIcon className="fa fa-plus" />}
-              onClick={() => this.setState({ showAddModal: true })}
+              onClick={() => history.push("/create/store")}
             />
           </Row>
           <Row>
@@ -86,67 +86,6 @@ class StoreList extends React.Component {
             />
           </Row>
         </Grid>
-
-        <Dialog
-          title="新增商店"
-          actions={[
-            <FlatButton
-              key="storesubmit"
-              label="送出"
-              onClick={this.saveStore}
-            />,
-            <FlatButton
-              key="storecancle"
-              label="取消"
-              primary={true}
-              onClick={() => this.setState({ showAddModal: false })}
-            />
-          ]}
-          modal={true}
-          open={this.state.showAddModal}
-        >
-          <label>
-            <Row>
-              <Avatar size={80} src={this.state.storeData.logo.url} />
-              <input
-                type="file"
-                style={{
-                  width: 0
-                }}
-                onChange={e => this.uploadFile(e.target.files[0])}
-              />
-            </Row>
-          </label>
-          <Row>
-            <TextField
-              hintText="請輸入商店名稱"
-              floatingLabelText="Store Name"
-              value={this.state.storeData.name}
-              onChange={e => {
-                const { storeData } = this.state;
-                storeData.name = e.target.value;
-                this.setState({ storeData });
-              }}
-            />
-          </Row>
-          <Row>
-            <DropDownMenu
-              value={this.state.storeData.cate}
-              onChange={(e, index, value) => {
-                const data = this.state.storeData;
-                data.cate = value;
-                this.setState({ storeData: data });
-              }}
-            >
-              <MenuItem value={1} primaryText="早餐" />
-              <MenuItem value={2} primaryText="午餐" />
-              <MenuItem value={3} primaryText="飲料" />
-              <MenuItem value={4} primaryText="點心" />
-              <MenuItem value={5} primaryText="飲料" />
-            </DropDownMenu>
-          </Row>
-          <Row />
-        </Dialog>
       </div>
     );
   }

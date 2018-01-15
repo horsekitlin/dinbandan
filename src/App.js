@@ -7,7 +7,8 @@ import AppBar from "material-ui/AppBar";
 import RaisedButton from "material-ui/RaisedButton";
 import RightIconButton from "./components/RightIconButton";
 import IconButton from "material-ui/IconButton";
-import CreateNewmenu from "./components/CreateNewmenu";
+import CreateNewmenu from "./containers/CreateNewmenu";
+import CreateStore from "./containers/CreateStore";
 import TextField from "material-ui/TextField";
 import FirebaseManager from "./utils/FirebaseManager";
 import Modal from "react-modal";
@@ -198,6 +199,7 @@ export default class App extends Component {
               this.state.user
             } />}/>
             <Route path="/create/menu/:StoreKey" component={CreateNewmenu}/>
+            <Route path="/create/store/" component={CreateStore}/>
             <Route path="/store" component={Store}/>
 
             <Sidebar
