@@ -27,6 +27,11 @@ class Sidebar extends React.PureComponent{
           primaryText="商店列表"
           leftIcon={< FontIcon className = "fa fa-building" />}/>
       </Link>
+      <Link to="/settings">
+        <MenuItem
+          primaryText="網站設定"
+          leftIcon={< FontIcon className = "fa fa-gear" />}/>
+      </Link>
       <Divider/>
     </Drawer>
     );
