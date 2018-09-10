@@ -40,9 +40,7 @@ class App extends Component {
     <LoginScene handleLogin={this.handleLogin}/>
 
   render() {
-    return this.props.auth.isAuth
-      ? this.MainScene()
-      : this.LoginScene();
+      return this.MainScene()
   }
 }
 

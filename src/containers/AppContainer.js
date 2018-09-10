@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import App from "../App";
-import { loginAction } from "../actions/loginActions";
+import { loginAction, logoutAction } from "../actions/authActions";
 import { chagePageAction } from "../actions/routesActions";
 
 const mapStateToProps = ({auth, routes}) => ({
@@ -15,6 +15,9 @@ const mapDispatchToProps = dispatch => {
     },
     handleLogin: payload => {
       dispatch(loginAction(payload));
+    },
+    handleLogout: () => {
+      dispatch(logoutAction());
     }
   };
 };
