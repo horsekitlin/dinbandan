@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginScene from './components/LoginScene';
+import LoginScene from './containers/LoginContainer';
 import MainScene from './MainScene';
 import {fetchPOST} from './apis/libs/fetch';
 import 'semantic-ui-css/semantic.min.css';
