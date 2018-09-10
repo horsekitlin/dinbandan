@@ -1,3 +1,8 @@
+import { put, call } from 'redux-saga/effects';
+import types from '../constants/actionTypes';
+
 export function* loginSaga ({payload}) {
-  console.log('login');
+  yield put({
+    type: types.LOGIN_SUCCESS
+  });
 }

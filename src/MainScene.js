@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeScene from './components/HomeScene';
-import { Sidebar, Segment, Menu, Button, Dropdown, Icon, Header } from 'semantic-ui-react';
+import { Sidebar, Segment, Menu, Button, Dropdown, Icon } from 'semantic-ui-react';
 
 const Navbar = ({handleOpenSidebar, logout}) =>
   <Menu>
