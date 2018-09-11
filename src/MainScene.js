@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeScene from './components/HomeScene';
-import { Sidebar, Segment, Menu, Button, Dropdown, Icon } from 'semantic-ui-react';
+import { Sidebar, Segment, Menu, Button, Dropdown, Icon, Container } from 'semantic-ui-react';
 
 const Navbar = ({handleOpenSidebar, logout}) =>
   <Menu>
@@ -36,26 +36,26 @@ class MainContentWithNavbar extends React.Component {
 
   render() {
     return(
-      <Sidebar.Pushable as={Segment} basic style={{width: '100vw', height: '100vh'}}>
-        <Sidebar
-          as={Menu}
-          animation='overlay'
-          icon='labeled'
-          onHide={() => this.setState({showSidebar: false})}
-          vertical
-          visible={this.state.showSidebar}
-          width='thin'>
-          <Menu.Item> <Icon name='user'/>使用者列表</Menu.Item>
-          <Menu.Item> <Icon name='map marker'/>餐廳列表</Menu.Item>
-          <Menu.Item> <Icon name='calendar alternate outline'/>揪團列表</Menu.Item>
-        </Sidebar>
-        <Sidebar.Pusher>
-          <Navbar
-            logout={this.props.logout}
-            handleOpenSidebar={() => this.setState({showSidebar: true})} />
-          <MainSceneContent {...this.props} />
-        </Sidebar.Pusher>
-      </Sidebar.Pushable>
+        <Sidebar.Pushable as={Segment} basic style={{width: '100vw', height: '100vh'}}>
+          <Sidebar
+            as={Menu}
+            animation='overlay'
+            icon='labeled'
+            onHide={() => this.setState({showSidebar: false})}
+            vertical
+            visible={this.state.showSidebar}
+            width='thin'>
+            <Menu.Item> <Icon name='user'/>使用者列表</Menu.Item>
+            <Menu.Item> <Icon name='map marker'/>餐廳列表</Menu.Item>
+            <Menu.Item> <Icon name='calendar alternate outline'/>揪團列表</Menu.Item>
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Navbar
+              logout={this.props.logout}
+              handleOpenSidebar={() => this.setState({showSidebar: true})} />
+            <Container><MainSceneContent {...this.props} /></Container>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
     );
   }
 }
