@@ -1,17 +1,48 @@
-workspace:
-  base: /react
-  path: drone/dinbandang
-
-clone:
-  git:
-    image: plugins/git
-    depath: 50
-    tags: true
-
 pipeline:
-  node:
-    image: node:8.9.1
-    pull: true
+  install:
+    image: node:10.9.0
     commands:
-      - npm install
-      - npm run build
+      # - yarn install
+      - pwd
+
+
+  # testing:
+  #   image: node:10.9.0
+  #   group: testing
+  #   commands:
+  #     - yarn run test
+  
+  scp:
+    image: appleboy/drone-scp
+    pull: true
+    host:
+      - 139.162.9.68
+    port: 22
+    username: root
+    user: root
+    secrets: [ ssh_password ]
+    target: /root
+    source:
+      - /drone/src/github.com/horsekitlin/dinbandan
+    when:
+      branch: develop
+
+  ssh:
+    image: appleboy/drone-ssh
+    host:
+      - 139.162.9.68
+    username: root
+    user: root
+    secrets: [ ssh_password ]
+    command_timeout: 600
+    script:
+      - . /root/.nvm/nvm.sh && nvm use 10.9.0
+      - mkdir -p /var/www/html/dinbandan.tomaslin.website
+      - cd /root/drone/src/github.com/horsekitlin/dinbandan/
+      - yarn install
+      - yarn build
+      - cp -a build/* /var/www/html/dinbandan.tomaslin.website
+      - cd /root
+      - rm -rf /root/drone
+    when:
+      branch: develop
