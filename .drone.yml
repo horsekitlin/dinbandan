@@ -37,11 +37,11 @@ pipeline:
     command_timeout: 600
     script:
       - . /root/.nvm/nvm.sh && nvm use 10.9.0
-      - mkdir -p /var/www/html/dinbandan.tomaslin.website
+      - mkdir -p /var/www/html/dinbandan.tomas.website
       - cd /root/drone/src/github.com/horsekitlin/dinbandan/
       - yarn install
       - yarn build
-      - cp -a build/* /var/www/html/dinbandan.tomaslin.website
+      - cp -a build/* /var/www/html/dinbandan.tomas.website
       - cd /root
       - rm -rf /root/drone
     when:
