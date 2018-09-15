@@ -43,6 +43,6 @@ pipeline:
       - yarn build
       - cp -a build/* /var/www/html/dinbandan.tomas.website
       - cd /root
-      - rm -rf /root/drone
+      # - rm -rf /root/drone
     when:
       branch: develop
