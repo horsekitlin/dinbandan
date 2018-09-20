@@ -53,7 +53,9 @@ class MainContentWithNavbar extends React.Component {
             <Navbar
               logout={this.props.logout}
               handleOpenSidebar={() => this.setState({showSidebar: true})} />
-            <Container><MainSceneContent {...this.props} /></Container>
+            <Container>
+              <MainSceneContent {...this.props} />
+            </Container>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
     );
